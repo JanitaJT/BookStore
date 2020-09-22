@@ -21,6 +21,10 @@
 			<td th:text="${book.year}">Year</td>
 			<td th:text="${book.isbn}">Isbn</td>
 			<td th:text="${book.price}">Price</td>
+			<td><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
+				<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
+		</tr>
 	</table>
+	<a href="/addbook">Add Book</a>
 </body>
 </html>

@@ -25,10 +25,7 @@ public class BookstoreApplication {
 	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository) {
 		return (args) -> {
 			log.info("Test data");
-			Book book1 = new Book("Harry Potter", "JK.Rowling", 2007, 1034728942, 26.95);
-			Book book2 = new Book("Da Vinci Code", "Dan Brown", 2003, 1034728943, 37.95);
-			bookRepository.save(book1);
-			bookRepository.save(book2);
+			
 
 			Category cate1 = new Category("Scifi");
 			Category cate2 = new Category("Fantasy");
@@ -36,14 +33,22 @@ public class BookstoreApplication {
 			categoryRepository.save(cate1);
 			categoryRepository.save(cate2);
 			categoryRepository.save(cate3);
-
-			log.info("Fetch categories");
-			for (Category category : categoryRepository.findAll()) {
-				log.info(category.toString());
-			}
+			
+			Book bookCate = new Book("Vargbröder", "Michelle Paver", 2008,1034728944, 25.95, cate2);
+			Book book1 = new Book("Harry Potter", "JK.Rowling", 2007, 1034728942, 26.95, cate2);
+			Book book2 = new Book("Da Vinci Code", "Dan Brown", 2003, 1034728943, 37.95, cate3);
+			bookRepository.save(book1);
+			bookRepository.save(book2);
+			bookRepository.save(bookCate);
+			
+			
 			log.info("Fetch books");
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
+			}
+			log.info("Fetch categories");
+			for (Category category : categoryRepository.findAll()) {
+				log.info(category.toString());
 			}
 
 		};

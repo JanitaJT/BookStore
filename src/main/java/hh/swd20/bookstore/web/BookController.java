@@ -18,6 +18,8 @@ public class BookController {
 	
 	@Autowired
 	BookRepository bookRepository;
+	@Autowired
+	private CategoryRepository caterepo;
 
 	
 	//kirja listaus
@@ -33,6 +35,7 @@ public class BookController {
 	@RequestMapping(value = "/addbook", method = RequestMethod.GET)
 	public String getNewBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", caterepo.findAll());
 		return "secondpageadd";
 	}
 	

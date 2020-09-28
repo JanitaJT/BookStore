@@ -22,7 +22,7 @@ public class Book {
 	@JoinColumn(name = "cateId")
 	private Category category;
 
-	public Book(Long id, String title, String author, int year, int isbn, double price) {
+	public Book(Long id, String title, String author, int year, int isbn, double price, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -30,6 +30,7 @@ public class Book {
 		this.year = year;
 		this.isbn = isbn;
 		this.price = price;
+		this.category = category;
 	}
 
 	public Book() {
@@ -97,9 +98,22 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	@Override
 	public String toString() {
+		if(this.category !=null)
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+					+ ", price=" + price + "category =" + this.getCategory() + "]";
+			else
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
 				+ ", price=" + price + "]";
 	}

@@ -29,16 +29,18 @@ public class BookstoreApplication {
 			Book book2 = new Book("Da Vinci Code", "Dan Brown", 2003, 1034728943, 37.95);
 			bookRepository.save(book1);
 			bookRepository.save(book2);
-			
+
 			Category cate1 = new Category("Scifi");
 			Category cate2 = new Category("Fantasy");
 			Category cate3 = new Category("Thriller");
 			categoryRepository.save(cate1);
 			categoryRepository.save(cate2);
 			categoryRepository.save(cate3);
-			
-			
 
+			log.info("Fetch categories");
+			for (Category category : categoryRepository.findAll()) {
+				log.info(category.toString());
+			}
 			log.info("Fetch books");
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());

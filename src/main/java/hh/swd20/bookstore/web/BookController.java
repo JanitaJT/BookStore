@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -70,7 +71,8 @@ public class BookController {
 	
 	//Kirjan poisto
 	@RequestMapping(value="/deletebook/{id}", method = RequestMethod.GET)
-	public String deleteBook(@PathVariable("id") Long bookId) {
+	@PreAuthorize("hasRole('ADMIN')")
+	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		bookRepository.deleteById(bookId);
 		return "redirect:../index";
 	}
@@ -81,6 +83,15 @@ public class BookController {
 		Book book = bookRepository.findById(bookId).get();
 		model.addAttribute("book", book);
 		return "edit";
+	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String homePage() {
+		return "login";
+	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.POST)
+	public String LogOut() {
+		return "redirect:../index";
 	}
 	
 	

@@ -11,6 +11,8 @@ import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
 import hh.swd20.bookstore.domain.Category;
 import hh.swd20.bookstore.domain.CategoryRepository;
+import hh.swd20.bookstore.domain.User;
+import hh.swd20.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,7 +24,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 			log.info("Test data");
 			
@@ -41,6 +43,11 @@ public class BookstoreApplication {
 			bookRepository.save(book2);
 			bookRepository.save(bookCate);
 			
+			User user1 = new User("user","$2b$10$nD21pS8NNhTszXHcxL9EheD.Ja5uyGoxQuJptgvzrEf4isnpipu2C","user.user@gmail.com","USER");
+			User user2 = new User("admin", "$2b$10$W84aPB/FVKJJbUj/jDJUsOibmKipSBOUaDU22trfPtfIsXBJxxlT2","admin.admin@gmail.com" ,"ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
+			
 			
 			log.info("Fetch books");
 			for (Book book : bookRepository.findAll()) {
@@ -51,6 +58,7 @@ public class BookstoreApplication {
 				log.info(category.toString());
 			}
 
+			
 		};
 	}
 
